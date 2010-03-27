@@ -2,12 +2,12 @@ module Rudionrails
   module AwesomeChart
     
     def pie_chart( collection, options = {}, html_options = {}, &block )
-      chart = PieChartBuilder.new( self, collection, options, html_options )
+      chart = PieChart.new( self, collection, options, html_options )
       yield( chart )
       concat( chart.to_html )
     end
 
-    class PieChartBuilder < Base
+    class PieChart < Base
       def initialize( template, collection, options = {}, html_options = {} )
         super
         
@@ -16,29 +16,11 @@ module Rudionrails
 
       def label( name, method ); @label = [name, method]; end
       def value( name, method ); @value = [name, method]; end
-      
-      
+
+
       protected
 
-      def google_chart
-        @template.javascript_tag(
-          <<-EOS
-          google.load( "visualization", "1", { packages: ["piechart"] } );
-          google.setOnLoadCallback( function() {
-            var data = new google.visualization.DataTable();
-
-            #{data_columns}
-            #{data_rows}
-
-            var chart = new google.visualization.PieChart( document.getElementById('#{@html_options[:id]}') );
-            chart.draw( data, #{@options.to_json} );
-          });
-          EOS
-        )
-      end
-
-
-      private
+      def packages; ["piechart"].to_json; end
       
       def data_columns
         [
@@ -67,3 +49,4 @@ module Rudionrails
 
   end
 end
+
