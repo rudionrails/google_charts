@@ -8,32 +8,33 @@ module Rudionrails
         @collection = collection
         @options = options
         @html_options = html_options.reverse_merge( :id => "awesomeChart" )
-
-        @html = [include_google_api, container_div]
       end
 
       def title( val ); @options[:title] = val; end
 
-      # stub
       def to_html
+        [ google_js_api, container_div, google_chart ].join("\n")
       end
 
+      
       protected
 
-      def include_google_api
-        <<-EOS
-        <script type="text/javascript">
+      def google_js_api
+        @template.javascript_tag(
+          <<-EOS
           if( typeof google == 'undefined' ) {
             document.write(unescape("%3Cscript src='http://www.google.com/jsapi' type='text/javascript'%3E%3C/script%3E"));
           };
-        </script>
-        EOS
+          EOS
+        )
       end
-
+      
+      # stub to be integrated by each chart subclass
+      def google_chart
+      end
+      
       def container_div
-        <<-EOS
-        <div id="#{@html_options[:id]}"></div>
-        EOS
+        @template.content_tag(:div, "", :id => @html_options[:id])
       end
 
     end

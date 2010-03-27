@@ -16,39 +16,51 @@ module Rudionrails
 
       def label( name, method ); @label = [name, method]; end
       def value( name, method ); @value = [name, method]; end
+      
+      
+      protected
 
-      def to_html
-        @html << <<-EOS
-        <script type="text/javascript">
+      def google_chart
+        @template.javascript_tag(
+          <<-EOS
           google.load( "visualization", "1", { packages: ["piechart"] } );
           google.setOnLoadCallback( function() {
             var data = new google.visualization.DataTable();
 
-            data.addColumn( 'string', '#{@label.first}' );
-            data.addColumn( 'number', '#{@value.first}' );
-
-            data.addRows([ #{data.join(", ")} ]);
+            #{data_columns}
+            #{data_rows}
 
             var chart = new google.visualization.PieChart( document.getElementById('#{@html_options[:id]}') );
             chart.draw( data, #{@options.to_json} );
           });
-        </script>
-        EOS
-
-        @html.join
+          EOS
+        )
       end
 
 
       private
+      
+      def data_columns
+        [
+          "data.addColumn( 'string', '#{@label.first}' );", 
+          "data.addColumn( 'number', '#{@value.first}' );" 
+        ].join( "\n" )
+      end
 
-      def data
-        @collection.inject( Array.new ) do |result, col|
+      def data_rows
+        html = [ "data.addRows([ " ]
+      
+        html << @collection.inject( Array.new ) do |result, col|
           label = @label.last.is_a?( Proc ) ? @label.last.call( col ) : col.send( @label.last )
           value = @value.last.is_a?( Proc ) ? @value.last.call( col ) : col.send( @value.last )
 
           result << [label, value].to_json
           result
-        end
+        end.join( ", " )
+        
+        html << "]);"
+        
+        html.join( "\n" )
       end
 
     end
