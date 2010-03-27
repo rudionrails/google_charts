@@ -8,14 +8,8 @@ module Rudionrails
     end
 
     class ColumnChart < LineChart
-
-      protected
-
-      def packages; ["columnchart"].to_json; end
-
     end
 
   end
 end
-
 

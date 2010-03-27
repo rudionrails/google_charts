@@ -8,14 +8,8 @@ module Rudionrails
     end
 
     class BarChart < LineChart
-
-      protected
-
-      def packages; ["barchart"].to_json; end
-
     end
 
   end
 end
-
 

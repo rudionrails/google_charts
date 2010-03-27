@@ -20,8 +20,6 @@ module Rudionrails
       
       protected
 
-      def packages; ["linechart"].to_json; end
-
       def data_columns
         html = [ "data.addColumn( 'string', '#{@label.first}' );" ]
         @values.inject( html ) do |result, value|

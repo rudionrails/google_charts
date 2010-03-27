@@ -55,7 +55,7 @@ module Rudionrails
       def data_rowsl; end
 
       def class_name; self.class.name.split( "::" ).last; end
-      def packages; end
+      def packages; [class_name.downcase].to_json end
 
     end
 

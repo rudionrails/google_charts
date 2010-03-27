@@ -19,8 +19,6 @@ module Rudionrails
 
 
       protected
-
-      def packages; ["piechart"].to_json; end
       
       def data_columns
         [
