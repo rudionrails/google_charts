@@ -5,3 +5,4 @@ if defined?( ActionView::Base )
 else
   $stderr.puts "Skipping AwesomeChart plugin. `gem install actionpack` and try again."
 end
+

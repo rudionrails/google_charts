@@ -20,32 +20,18 @@ module Rudionrails
       
       protected
 
-      def data_columns
-        html = [ "data.addColumn( 'string', '#{@label.first}' );" ]
-        @values.inject( html ) do |result, value|
-          result << "data.addColumn( 'number', '#{value.first}' );"
-          result
-        end.join( "\n" )
-      end
-
-      def data_rows
-        html = [ "data.addRows([ " ]
+      def setup_data
+        # setup the columns
+        add_column( 'string', @label.first )
+        @values.each { |val| add_column( 'number', val.first ) }
         
-        html << @collection.inject( Array.new ) do |result, col|
-          label = @label.last.is_a?( Proc ) ? @label.last.call( col ) : col.send( @label.last )
-
-          values = @values.inject( Array.new ) do |ary, value|
-            ary << (value.last.is_a?( Proc ) ? value.last.call( col ) : col.send( value.last ) )
-            ary
-          end
-
-          result << [label, *values].to_json
-          result
-        end.join( ", " )
-        
-        html << "]);"
-        
-        html.join( "\n" )
+        # setup the rows
+        @collection.each do |col|
+          label = value_for( @label.last, col )
+          values = @values.map { |value| value_for( value.last, col ) }
+          
+          add_row( [label, *values] )
+        end
       end
 
     end
