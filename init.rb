@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/lib/agoogle_charts'
+require File.dirname(__FILE__) + '/lib/google_charts'
 
 if defined?( ActionView::Base )
   ActionView::Base.send :include, Rudionrails::GoogleCharts
