@@ -1,8 +1,8 @@
-require File.dirname(__FILE__) + '/lib/awesome_chart'
+require File.dirname(__FILE__) + '/lib/agoogle_charts'
 
 if defined?( ActionView::Base )
-  ActionView::Base.send :include, Rudionrails::AwesomeChart
+  ActionView::Base.send :include, Rudionrails::GoogleCharts
 else
-  $stderr.puts "Skipping AwesomeChart plugin. `gem install actionpack` and try again."
+  $stderr.puts "Skipping GoogleCharts plugin. `gem install actionpack` and try again."
 end
 

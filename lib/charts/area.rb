@@ -1,5 +1,5 @@
 module Rudionrails
-  module AwesomeChart
+  module GoogleCharts
 
     def area_chart( collection, options = {}, html_options = {}, &block )
       chart = AreaChart.new( self, collection, options, html_options )

@@ -1,5 +1,5 @@
 module Rudionrails
-  module AwesomeChart
+  module GoogleCharts
 
     def line_chart( collection, options = {}, html_options = {}, &block )
       chart = LineChart.new( self, collection, options, html_options )

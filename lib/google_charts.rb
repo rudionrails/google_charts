@@ -1,5 +1,5 @@
 module Rudionrails
-  module AwesomeChart
+  module GoogleCharts
 
     VERSION = "0.0.1.0"
 

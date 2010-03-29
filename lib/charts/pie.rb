@@ -1,5 +1,5 @@
 module Rudionrails
-  module AwesomeChart
+  module GoogleCharts
     
     def pie_chart( collection, options = {}, html_options = {}, &block )
       chart = PieChart.new( self, collection, options, html_options )
