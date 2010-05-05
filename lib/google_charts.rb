@@ -10,7 +10,7 @@ module Rudionrails
         @collection = collection
         
         @options = options
-        @html_options = html_options.reverse_merge( :id => "awesomeChart" )
+        @html_options = html_options.reverse_merge( :id => "googleChart" )
 
         @columns, @rows = [], []
       end
