@@ -18,49 +18,42 @@ For a detailed description of which options to use visit the Google Visualizatio
 == Installation
 script/plugin install git://github.com/rudionrails/google_charts.git
 
-There is no gem yet, but may be added soon :-)
-
 
 == Usage
 GoogleCharts is based on a collection of elements (usually records from the database). They do not need to be ActiveRecord collections, simple arrays will do as well.
 
 For a simple pie chart, simply type this in your view:
-<% pie_chart( [ [:eggs, 3], [:bacon, 1] ], { :height => 300, :is3D => true }, { :id => "breakfastChart" } ) do |c| -%>
-  <% c.title "breakfast" %>
-
-  <% c.label "ingredient", :first %>
-  <% c.value "amount", :last %>
-<% end -%>
+  <% pie_chart( [ [:eggs, 3], [:bacon, 1] ], { :height => 300, :is3D => true }, { :id => "breakfastChart" } ) do |c| -%>
+    <% c.title "breakfast" %>
+  
+    <% c.label "ingredient", :first %>
+    <% c.value "amount", :last %>
+  <% end -%>
 
 As you may imagine, the pie_chart cycles through the collection [ [:eggs, 3], [:bacon, 1] ]. In this example, every item is itself an array again which have a :first and :last method in ruby. Those methods are called. 
 
 
 Now you may ask yourself: thats nice, but how can I get labels or values in my pie chart that are not direct methods on the collection elements? Have no fear, lamda is our friend in this case. The same pie chart can be visualized by calling those methods differently:
-<% pie_chart( [ [:eggs, 3], [:bacon, 1] ], { :height => 300, :is3D => true }, { :id => "breakfastChart" } ) do |c| -%>
-  <% c.title "breakfast" %>
-
-  <% c.label "ingredient", lambda { |e| e[0] } %>
-  <% c.value "amount", lambda { |e| e[1] } %>
-<% end -%>
+  <% pie_chart( [ [:eggs, 3], [:bacon, 1] ], { :height => 300, :is3D => true }, { :id => "breakfastChart" } ) do |c| -%>
+    <% c.title "breakfast" %>
+  
+    <% c.label "ingredient", lambda { |e| e[0] } %>
+    <% c.value "amount", lambda { |e| e[1] } %>
+  <% end -%>
 
 Now we get exactly the same chart, but it's been called in a different way via lamda. Like this, you can use view helpers such as number_to_currency, or any fancy helper method that will give you what you need. 
 
 
 Here's another example. Once again we have 3 eggs and 1 bacon, but now there's a price to the amounts which we can use in the displayed label:
-<% pie_chart( [ [:eggs, 1.99, 3], [:bacon, 3.99, 1] ], { :height => 300, :is3D => true }, { :id => "breakfastChart" } ) do |c| -%>
-  <% c.title "breakfast" %>
-
-  <% c.label "ingredient", lambda { |e| "#{e.last} #{e.first} for #{number_to_currency(e[1])}" } %>
-  <% c.value "amount", :last %>
-<% end -%>
+  <% pie_chart( [ [:eggs, 1.99, 3], [:bacon, 3.99, 1] ], { :height => 300, :is3D => true }, { :id => "breakfastChart" } ) do |c| -%>
+    <% c.title "breakfast" %>
+  
+    <% c.label "ingredient", lambda { |e| "#{e.last} #{e.first} for #{number_to_currency(e[1])}" } %>
+    <% c.value "amount", :last %>
+  <% end -%>
 
 
 One important thing to mention is, that you should always give the chart an :id. It will get a defaut "googleChart" id, but it may not work well got multiple charts on one page. Also, for charts that support 3D, you can always add the :is3D option (see examples above). All charts are interactive, there are no image charts as of now.
-
-
-== Further Examples
-
-... will be added soon...
 
 
 Copyright (c) 2010 Rudolf Schmidt, released under the MIT license.
