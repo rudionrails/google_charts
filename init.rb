@@ -1,8 +1,9 @@
-require File.dirname(__FILE__) + '/lib/google_charts'
+require 'google_charts'
 
-if defined?( ActionView::Base )
-  ActionView::Base.send :include, Rudionrails::GoogleCharts
-else
+begin
+  require 'actionpack'
+  ActionView::Base.send :include, GoogleCharts::Helpers::ActionView
+rescue LoadError
   $stderr.puts "Skipping GoogleCharts plugin. `gem install actionpack` and try again."
 end
 
