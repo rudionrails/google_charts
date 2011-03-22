@@ -53,7 +53,7 @@ Here's another example. Once again we have 3 eggs and 1 bacon, but now there's a
   <% end -%>
 
 
-One important thing to mention is, that you should always give the chart an :id. It will get a defaut "googleChart" id, but it may not work well got multiple charts on one page. Also, for charts that support 3D, you can always add the :is3D option (see examples above). All charts are interactive, there are no image charts as of now.
+One important thing to mention is, that you should always give the chart an :id. It will get a defaut "googleChart" id, but it may not work well for multiple charts on one page. Also, for charts that support 3D, you can always add the :is3D option (see examples above). All charts are interactive, there are no image charts as of now.
 
 
-Copyright (c) 2010 Rudolf Schmidt, released under the MIT license.
+Copyright (c) 2010 - 2011 Rudolf Schmidt, released under the MIT license.
