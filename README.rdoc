@@ -16,8 +16,8 @@ For a detailed description of which options to use visit the Google Visualizatio
 
 
 == Installation
-script/plugin install git://github.com/rudionrails/google_charts.git
-
+  gem install google_charts
+  
 
 == Usage
 GoogleCharts is based on a collection of elements (usually records from the database). They do not need to be ActiveRecord collections, simple arrays will do as well.
