@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Rudolf Schmidt"]
   
-  s.homepage    = ""
+  s.homepage    = "http://github.com/rudionrails/google_charts"
   s.summary     = %q{Google Charts with Ruby}
   s.description = %q{GoogleCharts is a Ruby wrapper to the Google Chart API}
 
