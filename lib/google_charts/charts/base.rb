@@ -2,12 +2,12 @@ module GoogleCharts::Charts
 
   class Base
 
-    def initialize( template, collection, options = {}, html_options = {} )
+    def initialize( template, collection, options = {} )
       @template = template
       @collection = collection
 
       @options = options
-      @html_options = { :id => "googleChart" }.merge( html_options )
+      @html_options = { :id => "googleChart" }.merge( options.delete(:html) || {} )
 
       @columns, @rows = [], []
     end
@@ -21,7 +21,7 @@ module GoogleCharts::Charts
         google_jsapi,
         container_div,
         google_chart
-      ].join("\n")
+      ].join("\n").html_safe
     end
 
 

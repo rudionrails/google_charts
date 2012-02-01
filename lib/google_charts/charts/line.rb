@@ -1,14 +1,14 @@
 module GoogleCharts::Charts
 
   class Line < GoogleCharts::Charts::Base
-    def initialize( template, collection, options = {}, html_options = {} )
+    def initialize( template, collection, options = {} )
       super
 
       @label, @values = [], []
     end
 
-    def label( name, method ); @label = [name, method]; end
-    def value( name, method ); @values << [name, method]; end
+    def label(name, method = nil, &block); @label = [name, block ? block : method]; end
+    def value(name, method = nil, &block); @values << [name, block ? block : method]; end
 
 
     private
