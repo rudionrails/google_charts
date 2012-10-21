@@ -1,4 +1,5 @@
 module GoogleCharts::Charts
+
   class Base
 
     @@number = 0
@@ -9,8 +10,7 @@ module GoogleCharts::Charts
 
       @options = options
       @html_options = { :id => "googleChart_#{@@number}" }.merge( options.delete(:html) || {} )
-      puts @html_options.inspect
-      @@number+=1
+      @@number += 1
       @columns, @rows = [], []
     end
     
