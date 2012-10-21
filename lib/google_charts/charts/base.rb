@@ -1,14 +1,16 @@
 module GoogleCharts::Charts
-
   class Base
+
+    @@number = 0
 
     def initialize( template, collection, options = {} )
       @template = template
       @collection = collection
 
       @options = options
-      @html_options = { :id => "googleChart" }.merge( options.delete(:html) || {} )
-
+      @html_options = { :id => "googleChart_#{@@number}" }.merge( options.delete(:html) || {} )
+      puts @html_options.inspect
+      @@number+=1
       @columns, @rows = [], []
     end
     
